@@ -1,12 +1,15 @@
-package com.em.test.entitymanagertest;
+package com.em.test.entitymanagertest.repository.impl;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Tuple;
 
 import org.springframework.stereotype.Repository;
+
+import com.em.test.entitymanagertest.dto.VinDto;
+import com.em.test.entitymanagertest.repository.VinRepositoryCustom;
 
 @Repository
 public class VinRepositoryCustomImpl implements VinRepositoryCustom {
@@ -26,24 +29,23 @@ public class VinRepositoryCustomImpl implements VinRepositoryCustom {
 		queryBuilder.append(
 				"vinMaster.dealerCode = dealerMaster.dealerCode and (vinMaster.vin=:input or vinMaster.contractNumber=:input or vinMaster.orderNumber=:input)");
 
-		List<Tuple> tuples = entityManager.createQuery(queryBuilder.toString(), Tuple.class)
-				.setParameter("input", vinOrderContractNumber).getResultList();
-
-		List<VinDto> vinDtos = new ArrayList<>();
-		for (Tuple tuple : tuples) {
-
-			VinDto vinDto = new VinDto();
-			vinDto.setVin(tuple.get("vin", String.class));
-			vinDto.setDealerCode(tuple.get("dc", String.class));
-			vinDto.setDealerName(tuple.get("dn", String.class));
-
-			vinDtos.add(vinDto);
-		}
+		List<VinDto> vinDtos = entityManager.createQuery(queryBuilder.toString(), Tuple.class)
+				.setParameter("input", vinOrderContractNumber)
+				.getResultList()
+				.stream()
+				.map(tuple -> {
+					VinDto vinDto = new VinDto();
+					vinDto.setVin(tuple.get("vin", String.class));
+					vinDto.setDealerCode(tuple.get("dc", String.class));
+					vinDto.setDealerName(tuple.get("dn", String.class));
+					return vinDto;
+				}).collect(Collectors.toList());
+				
 
 		for (VinDto vinDto : vinDtos) {
-			System.out.println("vin ===> " + vinDto.getVin());
-			System.out.println("dealer code ===> " + vinDto.getDealerCode());
-			System.out.println("dealer Name ===> " + vinDto.getDealerName());
+			System.out.println("vin ====> " + vinDto.getVin());
+			System.out.println("dealer code ====> " + vinDto.getDealerCode());
+			System.out.println("dealer Name ====> " + vinDto.getDealerName());
 		}
 
 	}

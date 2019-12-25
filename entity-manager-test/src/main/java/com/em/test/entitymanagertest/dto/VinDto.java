@@ -1,4 +1,4 @@
-package com.em.test.entitymanagertest;
+package com.em.test.entitymanagertest.dto;
 
 public class VinDto {
 	private String vin;

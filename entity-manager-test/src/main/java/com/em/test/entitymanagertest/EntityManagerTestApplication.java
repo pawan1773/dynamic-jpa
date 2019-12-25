@@ -8,6 +8,11 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.em.test.entitymanagertest.entity.DealerMaster;
+import com.em.test.entitymanagertest.entity.VinMaster;
+import com.em.test.entitymanagertest.repository.DealerMasterRepository;
+import com.em.test.entitymanagertest.repository.VinMasterRepository;
+
 @SpringBootApplication
 public class EntityManagerTestApplication implements CommandLineRunner {
 

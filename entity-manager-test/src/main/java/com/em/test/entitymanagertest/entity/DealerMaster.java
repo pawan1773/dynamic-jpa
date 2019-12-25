@@ -1,4 +1,4 @@
-package com.em.test.entitymanagertest;
+package com.em.test.entitymanagertest.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
