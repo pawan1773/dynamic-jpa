@@ -12,11 +12,11 @@ import com.em.test.entitymanagertest.service.VinService;
 public class VinController {
 	
 	@Autowired
-	private VinService vinService;
+	private VinService vinServiceImpl;
 	
 	@GetMapping
 	public String getVinDetails() {
-		vinService.getVinDetails();
+		vinServiceImpl.getVinDetails();
 		return "Success";
 	}
 

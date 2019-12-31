@@ -15,7 +15,7 @@ import com.em.test.entitymanagertest.repository.VinRepositoryCustom;
 public class VinRepositoryCustomImpl implements VinRepositoryCustom {
 
 	@Override
-	public void getVinDetails(String vinOrderContractNumber, EntityManager entityManager) {
+	public List<VinDto> getVinDetails(String vinOrderContractNumber, EntityManager entityManager) {
 
 		String fields = "vinMaster.vin as vin, vinMaster.dealerCode as dc, dealerMaster.dealerName as dn ";
 		String tables = "VinMaster vinMaster, DealerMaster dealerMaster ";
@@ -29,7 +29,7 @@ public class VinRepositoryCustomImpl implements VinRepositoryCustom {
 		queryBuilder.append(
 				"vinMaster.dealerCode = dealerMaster.dealerCode and (vinMaster.vin=:input or vinMaster.contractNumber=:input or vinMaster.orderNumber=:input)");
 
-		List<VinDto> vinDtos = entityManager.createQuery(queryBuilder.toString(), Tuple.class)
+		return entityManager.createQuery(queryBuilder.toString(), Tuple.class)
 				.setParameter("input", vinOrderContractNumber)
 				.getResultList()
 				.stream()
@@ -41,13 +41,6 @@ public class VinRepositoryCustomImpl implements VinRepositoryCustom {
 					return vinDto;
 				}).collect(Collectors.toList());
 				
-
-		for (VinDto vinDto : vinDtos) {
-			System.out.println("vin ====> " + vinDto.getVin());
-			System.out.println("dealer code ====> " + vinDto.getDealerCode());
-			System.out.println("dealer Name ====> " + vinDto.getDealerName());
-		}
-
 	}
 
 }
