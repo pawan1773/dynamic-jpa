@@ -1,4 +1,4 @@
-package com.em.test.entitymanagertest.service.impl;
+package com.em.test.entitymanagertest.repository.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -21,11 +21,10 @@ import com.em.test.entitymanagertest.entity.VinMaster;
 import com.em.test.entitymanagertest.repository.DealerMasterRepository;
 import com.em.test.entitymanagertest.repository.VinMasterRepository;
 import com.em.test.entitymanagertest.repository.VinRepositoryCustom;
-import com.em.test.entitymanagertest.repository.impl.VinRepositoryCustomImpl;
 
 @DataJpaTest
 @TestInstance(Lifecycle.PER_CLASS)
-public class VinServiceImplTest {
+public class VinRepositoryImplTest {
 
 	@PersistenceContext
 	private EntityManager entityManager;
@@ -65,8 +64,8 @@ public class VinServiceImplTest {
 
 	@Test
 	public void getVinDetailsTest() {
-		VinRepositoryCustom vinRepositoryCustom = new VinRepositoryCustomImpl();
-		List<VinDto> vinDetails = vinRepositoryCustom.getVinDetails("vin0", entityManager);
+		VinRepositoryCustom vinRepositoryCustom = new VinRepositoryCustomImpl(entityManager);
+		List<VinDto> vinDetails = vinRepositoryCustom.getVinDetails("vin0");
 
 		assertEquals(1, vinDetails.size());
 
