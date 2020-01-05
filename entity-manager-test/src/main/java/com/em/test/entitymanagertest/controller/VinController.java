@@ -16,7 +16,7 @@ public class VinController {
 	
 	@GetMapping
 	public String getVinDetails() throws Exception {
-		vinServiceImpl.getVinDetails();
+		vinServiceImpl.getVinDetails("vin");
 		return "Success";
 	}
 

@@ -32,9 +32,8 @@ public class VinServiceImpl implements VinService {
 
 
 	@Override
-	public void getVinDetails() throws Exception {
-		String vinOrderContractNumber = "vin123";
-		List<VinDto> vinDtos = vinRepositoryCustom.getVinDetails(vinOrderContractNumber);
+	public void getVinDetails(String input) throws Exception {
+		List<VinDto> vinDtos = vinRepositoryCustom.getVinDetails(input);
 		if(vinDtos == null || vinDtos.isEmpty()) {
 			throw new Exception(environment.getProperty("ex.msg"));
 		}
