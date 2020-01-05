@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Tuple;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
@@ -20,6 +21,7 @@ public class VinRepositoryCustomImpl implements VinRepositoryCustom {
 	@PersistenceContext
 	private EntityManager entityManager;
 	
+	@Autowired
 	public VinRepositoryCustomImpl(EntityManager entityManager) {
 		this.entityManager = entityManager;
 	}

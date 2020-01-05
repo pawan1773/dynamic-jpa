@@ -2,6 +2,6 @@ package com.em.test.entitymanagertest.service;
 
 public interface VinService {
 
-	void getVinDetails();
+	void getVinDetails() throws Exception;
 
 }
